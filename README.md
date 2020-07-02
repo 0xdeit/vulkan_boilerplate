@@ -1,6 +1,9 @@
 # vulkan_boilerplate
 Simple Vulkan Boilerplate based on the Vulkan Tutorial
 
+## Works on
+- Tested on Fedora 32
+
 ## Dependencies:
 - Meson with Ninja as a backend
 - GLFW3
