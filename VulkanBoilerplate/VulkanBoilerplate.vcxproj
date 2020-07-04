@@ -86,7 +86,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\main.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
