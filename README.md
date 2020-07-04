@@ -15,7 +15,7 @@ Simple Vulkan (C++ 17) Boilerplate based on the Vulkan Tutorial
 - Recommended: Use your system's package manager to install dependencies
   - TODO: List packages per distro
 - In project's root directory, run `meson setup build_dir`. 
-This step will set the compiler from the system's default, `gcc` on most Linux distributions by default.
+This step will set the compiler from the system's default, `gcc` on most Linux distributions.
 - To build the project run either `meson compile -C build_dir` or `ninja -C build_dir`
 - Go to `build_dir` and run the executable `vulkan_boilerplate`
 - You should see a blank window with the title `Vulkan Boilerplate`
