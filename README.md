@@ -13,10 +13,16 @@ Simple Vulkan (C++ 17) Boilerplate based on the Vulkan Tutorial
 
 ## Getting Started (Linux)
 - Recommended: Use your system's package manager to install dependencies
-  - TODO: List packages per distro
+  - Ubuntu (20.04) `sudo apt install meson ninja-build pkg-config libglfw3-dev libvulkan-dev`
+- Confirm that the installed library dependencies are recognized by pkg-config
+`pkg-config --list-all | grep -E 'vulkan|glfw3'`.  
+```
+vulkan             Vulkan-Loader - Vulkan Loader
+glfw3              GLFW - A multi-platform library for OpenGL, window and input
+```
 - In project's root directory, run `meson setup build_dir`. 
 This step will set the compiler from the system's default, `gcc` on most Linux distributions.
-- To build the project run either `meson compile -C build_dir` or `ninja -C build_dir`
+- To build the project run either `meson compile -C build_dir`(Meson >= 0.54) or `ninja -C build_dir` (Meson < 0.54)
 - Go to `build_dir` and run the executable `vulkan_boilerplate`
 - You should see a blank window with the title `Vulkan Boilerplate`
 
