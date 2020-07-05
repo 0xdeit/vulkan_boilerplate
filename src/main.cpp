@@ -59,6 +59,16 @@ private:
 	VkInstance instance;
 	VkDebugUtilsMessengerEXT debugMessenger;
 	VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
+	
+	struct QueueFamilyIndices {
+		uint32_t graphicsFamily;
+	};
+
+	QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device) {
+		QueueFamilyIndices indices;
+		// logic
+		return indices;
+	}
 
 	void initWindow() {
 		glfwInit();
@@ -87,6 +97,7 @@ private:
 		std::vector<VkPhysicalDevice> devices(deviceCount);
 		vkEnumeratePhysicalDevices(instance, &deviceCount, devices.data());
 
+		// std::multimap is sorted list of key-value pairs. Sorted by key.
 		std::multimap<int, VkPhysicalDevice> candidates;
 
 		for (const auto& device : devices) {
