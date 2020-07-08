@@ -4,3 +4,7 @@
 build*
 debug*
 release*
+
+.clangd*
+
+compile_commands.json
