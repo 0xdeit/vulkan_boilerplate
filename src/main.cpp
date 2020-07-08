@@ -1,12 +1,20 @@
+// Vulkan headers
 #define GLFW_INCLUDE_VULKAN
+// GLFW3 lib
 #include <GLFW/glfw3.h>
 
 #include <cstdlib>
 #include <cstring>
+// std::cout, std::cin
 #include <iostream>
+// std::runtime_error
 #include <stdexcept>
+// std::vector
 #include <vector>
+// std::multimap
 #include <map>
+// std::optional 
+#include <optional>
 
 const uint32_t WIDTH = 800;
 const uint32_t HEIGHT = 600;
@@ -61,12 +69,12 @@ private:
 	VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
 	
 	struct QueueFamilyIndices {
-		uint32_t graphicsFamily;
+        std::optional<uint32_t> graphicsFamily;
 	};
 
 	QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device) {
 		QueueFamilyIndices indices;
-		// logic
+
 		return indices;
 	}
 
