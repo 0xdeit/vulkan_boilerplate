@@ -35,9 +35,7 @@ VkResult CreateDebugUtilsMessengerEXT(
 	auto func = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(
 		instance, "vkCreateDebugUtilsMessengerEXT");
 	if (func != nullptr) {
-#pragma warning disable 26812
 		return func(instance, pCreateInfo, pAllocator, pDebugMessenger);
-#pragma warning restore 26812
 	}
 	else {
 		return VK_ERROR_EXTENSION_NOT_PRESENT;
