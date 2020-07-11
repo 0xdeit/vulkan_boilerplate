@@ -35,7 +35,9 @@ VkResult CreateDebugUtilsMessengerEXT(
 	auto func = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(
 		instance, "vkCreateDebugUtilsMessengerEXT");
 	if (func != nullptr) {
+#pragma warning disable 26812
 		return func(instance, pCreateInfo, pAllocator, pDebugMessenger);
+#pragma warning restore 26812
 	}
 	else {
 		return VK_ERROR_EXTENSION_NOT_PRESENT;
@@ -62,17 +64,30 @@ public:
 	}
 
 private:
-	GLFWwindow* window;
+	// main window
+	GLFWwindow* window = nullptr;
 
+	// main vulkan instance
 	VkInstance instance = VK_NULL_HANDLE;
+	
+	// callback extension debugger
 	VkDebugUtilsMessengerEXT debugMessenger = VK_NULL_HANDLE;
+	
+	// vulkan devices
 	VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
+	// logical device
 	VkDevice device = VK_NULL_HANDLE;
+	// queue to process commands
 	VkQueue graphicsQueue = VK_NULL_HANDLE;
 
+	// window surface
+	VkSurfaceKHR surface = VK_NULL_HANDLE;
+
 	struct QueueFamilyIndices {
+		// optional is a C++17, it enable you to check if a variable has been assigned a value or not
 		std::optional<uint32_t> graphicsFamily;
 
+		// wrapper to know if there is a queue family with graphics support
 		bool isComplete() {
 			return graphicsFamily.has_value();
 		}
@@ -106,7 +121,9 @@ private:
 	void initWindow() {
 		glfwInit();
 
+		// tell glfw to not use a specific api? TODO: reasearch
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+		// disable resizing the window, this project is not configured to handle resizing
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 		window = glfwCreateWindow(WIDTH, HEIGHT, "Vulkan Boilerplate", nullptr, nullptr);
@@ -139,10 +156,16 @@ private:
 			candidates.insert(std::make_pair(score, device));
 		}
 
+
+		// as candidates is a sorted list, the last value will always be the biggest score (first element)
 		if (candidates.rbegin()->first > 0) {
+			
+			// INFO LOGGING
 			VkPhysicalDeviceProperties deviceProperties;
 			vkGetPhysicalDeviceProperties(candidates.rbegin()->second, &deviceProperties);
 			std::cout << "Using device: " << deviceProperties.deviceName << std::endl;
+			
+			// established the device with the best score, or the only one in the system.
 			physicalDevice = candidates.rbegin()->second;
 		}
 		else {
@@ -171,7 +194,7 @@ private:
 		if (!deviceFeatures.geometryShader)
 			return 0;
 
-		// Ensure that the device can process the commands that we need
+		// Ensure that the device can process the graphics commands that we need
 		QueueFamilyIndices indices = findQueueFamilies(device);
 		if (!indices.isComplete())
 			return 0;
